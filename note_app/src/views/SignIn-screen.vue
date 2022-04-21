@@ -6,6 +6,7 @@
     <button @click="register">Submit</button>
     <button @click="signInWithGoogle">Sign In With Google</button>
     <p v-if="errorMessage">{{ errorMessage }}</p>
+    <a href="/register"> czy może ;) nie masz :>>> jeszzczeee kąąątaaaa heeeee??? ;> </a>
   </div>
 </template>
 
