@@ -1,6 +1,13 @@
 <template>
   <div class="container">
-    <h1 class="app-name position-absolute top-0 ms-2 mt-2">NoteApp</h1>
+    <div class="row position-absolute top-0 ms-2 mt-2">
+      <div class="col col-title">
+        <img style="height:40px"  src = "./assets/note.svg" alt="NoteAppLogo"/>
+      </div>
+      <div class="col col-title">
+        <p class="app-name">NoteApp</p>
+      </div>
+    </div>
     <ul class="nav nav-pills nav-fill">
       <li class="nav-item">
         <router-link class="nav-link nav-custom" to="home" active-class="active">Notes</router-link>
