@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+// import bootstrap from "bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -7,6 +10,7 @@ const router = createRouter({
         { path: "/", component: () => import("../views/SignIn-screen.vue") },
         { path: "/register", component: () => import("../views/Register-screen.vue") },
         { path: "/sign-in", component: () => import("../views/SignIn-screen.vue") },
+        { path: "/home", component: () => import("../views/home-screen.vue") },
         {
             path: "/feed", component: () => import("../views/Feed-screen.vue"),
             meta: {

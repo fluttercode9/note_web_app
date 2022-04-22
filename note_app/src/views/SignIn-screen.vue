@@ -6,13 +6,14 @@
     <button @click="register">Submit</button>
     <button @click="signInWithGoogle">Sign In With Google</button>
     <p v-if="errorMessage">{{ errorMessage }}</p>
+    <a href="/register"> czy może ;) nie masz :>>> jeszzczeee kąąątaaaa heeeee??? ;> </a>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 const email = ref(""); //https://compiletab.com/vue-get-input-value/#get-input-value-using-ref
 const password = ref("");
 const router = useRouter();
@@ -43,5 +44,13 @@ const register = () => {
     });
 };
 
-const signInWithGoogle = () => {};
-</script>
+const signInWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(getAuth(), provider).then((result)=> {
+        console.log(result.user);
+        router.push("feed");
+    })
+    .catch((error) =>{
+        console.log(error.code)
+    })
+};</script>
