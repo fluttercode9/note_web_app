@@ -18,6 +18,9 @@
       <li class="nav-item">
         <router-link class="nav-link" to="sign-in" active-class="active">Log-in</router-link>
       </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="add-note" active-class="active">Add a new note</router-link>
+      </li>
       <li v-if ="isLoggedIn" class="nav-item">
         <button class="nav-link"   @click="handleLogOut">Log-out</button>
       </li>
