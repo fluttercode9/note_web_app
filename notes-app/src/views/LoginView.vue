@@ -1,7 +1,7 @@
 <template>
   <main class="logi">
     <section class="forms">
-      <form class="register">
+      <form class="register" @submit.prevent = "register">
         <h2>Register</h2>
         <input
           v-model="register_form.email"
@@ -19,7 +19,24 @@
         />
         <input type="submit" value="Register" />
       </form>
-      <form class="login"></form>
+      <form class="login" @submit.prevent ="login">
+        <h2>Login</h2>
+        <input
+          v-model="login_form.email"
+          type="email"
+          name=""
+          id=""
+          placeholder="Email address"
+        />
+        <input
+          v-model="login_form.password"
+          type="password"
+          name=""
+          id=""
+          placeholder="Password"
+        />
+        <input type="submit" value="Login" />
+      </form>
     </section>
   </main>
 </template>
@@ -32,10 +49,18 @@ export default {
     const login_form = ref({});
     const register_form = ref({});
     const store = useStore();
+    const login =  () => {
+        store.dispatch('login', login_form.value )
+    }
+    const register =  () => {
+        store.dispatch('register', register_form.value )
+    }
 
     return {
       login_form,
       register_form,
+      login,
+      register
     };
   },
 };
