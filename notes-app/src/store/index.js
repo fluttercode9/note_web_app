@@ -1,11 +1,13 @@
 import { createStore } from 'vuex';
 import router from '@/router';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut
 } from 'firebase/auth';
+import { collection, getDoc, setDoc } from "firebase/firestore"
+
 
 export default createStore({
   state: {
@@ -20,13 +22,13 @@ export default createStore({
     }
   },
   actions: {
-    async login ({ commit }, details) {
+    async login({ commit }, details) {
       const { email, password } = details
 
       try {
         await signInWithEmailAndPassword(auth, email, password)
       } catch (error) {
-        switch(error.code) {
+        switch (error.code) {
           case 'auth/user-not-found':
             alert("User not found")
             break
@@ -49,47 +51,58 @@ export default createStore({
       commit('CLEAR_USER')
       router.push('/login')
     },
-    async register ({ commit}, details) {
+    async register({ commit }, details) {
       const { email, password } = details
 
-     try {
-       await createUserWithEmailAndPassword(auth, email, password)
-     } catch (error) {
-       switch(error.code) {
-         case 'auth/email-already-in-use':
-           alert("Email already in use")
-           break
-         case 'auth/invalid-email':
-           alert("Invalid email")
-           break
-         case 'auth/operation-not-allowed':
-           alert("Operation not allowed")
-           break
-         case 'auth/weak-password':
-           alert("Weak password")
-           break
-         default:
-           alert("Something went wrong")
-       }
+      try {
+        console.log(db)
+        const createUser = await createUserWithEmailAndPassword(auth, email, password)
+        const result = await createUser
+        const database = db.collection("dupa").doc(result.user.uid);
+        await database.set({
+          id: result.user.uid
+        })
+        
 
-       return
-     }
+      } catch (error) {
+        switch (error.code) {
+          case 'auth/email-already-in-use':
+            alert("Email already in use")
+            break
+          case 'auth/invalid-email':
+            alert("Invalid email")
+            break
+          case 'auth/operation-not-allowed':
+            alert("Operation not allowed")
+            break
+          case 'auth/weak-password':
+            alert("Weak password")
+            break
+          default:
+            alert("Something went wrong",error.code)
+        }
 
-     commit('SET_USER', auth.currentUser)
+        return
+      }
 
-     router.push('/')
-   },
+      commit('SET_USER', auth.currentUser)
 
-   fetchUser({commit}) {auth.onAuthStateChanged(async user =>  {
-     if (user === null){
-       commit('CLEAR_USER')
-     } else {
-       commit('SET_USER', user)
-       if (router.isReady() && router.currentRoute.value.path === '/login') {
-         router.push('/')
-       }
-     }
-   })}
+      router.push('/')
+    },
+
+    fetchUser({ commit }) {
+      auth.onAuthStateChanged(async user => {
+        if (user === null) {
+          commit('CLEAR_USER')
+        } else {
+          commit('SET_USER', user)
+          if (router.isReady() && router.currentRoute.value.path === '/login') {
+            router.push('/')
+          }
+        }
+      })
+    },
+
 
   },
 
