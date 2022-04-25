@@ -1,6 +1,8 @@
 <script>
 import { collection, getDocs } from "firebase/firestore"; 
 import {db} from "../main.js";
+import {getAuth} from "firebase/auth";
+
 export default {
     data() {
         return {
@@ -8,7 +10,8 @@ export default {
         }
     },
     async mounted() {
-        const querySnapshot = await getDocs(collection(db, "test-notes-collection"));
+        const auth = getAuth();
+        const querySnapshot = await getDocs(collection(db, `users/${auth.currentUser.uid}/notes`));
         let notes_array = []
         querySnapshot.forEach((doc) => {
             console.log(`${doc.id} => ${doc.data()}`);
