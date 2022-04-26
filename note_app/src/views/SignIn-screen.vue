@@ -24,7 +24,7 @@ const register = () => {
     .then(() => {
       console.log("Succesfully logged in!");
       console.log(auth.currentUser); // <======== thats how u get curr user data
-      router.push("/feed");
+      router.push("/home");
     })
     .catch((error) => {
       switch (error.code) {
