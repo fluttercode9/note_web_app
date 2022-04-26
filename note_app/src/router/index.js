@@ -10,7 +10,7 @@ const router = createRouter({
         { path: "/", component: () => import("../views/SignIn-screen.vue") },
         { path: "/register", component: () => import("../views/Register-screen.vue") },
         { path: "/sign-in", component: () => import("../views/SignIn-screen.vue") },
-        { path: "/home", component: () => import("../views/home-screen.vue") },
+        // { path: "/home", component: () => import("../views/home-screen.vue") },
         { path: "/add-note", component: () => import("../views/NewNote-screen.vue") },
         { path: "/add-text-note", component: () => import("../views/NewTextNote-screen.vue") },
         {
