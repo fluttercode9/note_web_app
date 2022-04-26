@@ -11,7 +11,7 @@ export default {
     },
     async mounted() {
         const auth = getAuth();
-        const querySnapshot = await getDocs(collection(db, `users/${auth.uid}/notes`));
+        const querySnapshot = await getDocs(collection(db, `users/${auth.currentUser.uid}/notes`));
         let notes_array = []
         querySnapshot.forEach((doc) => {
             console.log(`${doc.id} => ${doc.data()}`);
