@@ -12,7 +12,7 @@ export default {
         createTextNote: function () {
             const auth = getAuth();
             console.log(auth.currentUser.uid);
-            addDoc(collection(db, `users/${auth.currentUser.uid}/notes`), {
+            addDoc(collection(db, `users/${auth.uid}/notes`), {
                 Title: 'new',
                 Content: "do testu v2"                
             });
