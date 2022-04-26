@@ -10,13 +10,37 @@ const router = createRouter({
         { path: "/", component: () => import("../views/SignIn-screen.vue") },
         { path: "/register", component: () => import("../views/Register-screen.vue") },
         { path: "/sign-in", component: () => import("../views/SignIn-screen.vue") },
-        { path: "/home", component: () => import("../views/home-screen.vue") },
         {
-            path: "/feed", component: () => import("../views/Feed-screen.vue"),
-            meta: {
+            path: "/home", component: () => import("../views/home-screen.vue"), meta: {
                 requiresAuth: true,
             }
         },
+        {
+            path: "/note-type", component: () => import("../views/ChooseNoteType-screen.vue"), meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: "/create-photo", component: () => import("../views/CreatePhotoNote-screen.vue"), meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: "/create-text", component: () => import("../views/CreateTextNote-screen.vue"), meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: "/create-voice", component: () => import("../views/CreateVoiceNote-screen.vue"), meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: "/notes/:id", name:'note', component: () => import("../views/NoteView-screen.vue"), meta: {
+                requiresAuth: true,
+            }
+        },
+       
     ],
 });
 

@@ -15,9 +15,10 @@ export default {
         let notes_array = []
         querySnapshot.forEach((doc) => {
             console.log(`${doc.id} => ${doc.data()}`);
-            notes_array.push(doc.data())
+            notes_array.push(doc)
         });
         this.notes = notes_array
+
 
     },
     methods : {
@@ -37,10 +38,10 @@ export default {
 <template>
     <div class="container-flex" v-if="notes">
         <div class="card mb-1" v-for="note in notes" :key="note.Title">
-            <div class="card-body" style="text-align: justify;text-justify: inter-word;">
-                <h5 class="card-title">{{ note.Title }}</h5>
-                <p style="color:grey;" class="card-text">{{ first20(note.Content)}}</p>
-            </div>
+            <router-link :to = "{name:'note', params:{ id: note.id}}"> <div class="card-body" style="text-align: justify;text-justify: inter-word;">
+                <h5 class="card-title">{{ note.data().Title }}</h5>
+                <p style="color:grey;" class="card-text">{{ first20(note.data().Content)}}</p>
+            </div></router-link>
         </div>
     </div>
 </template>

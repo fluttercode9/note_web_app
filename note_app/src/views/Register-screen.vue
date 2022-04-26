@@ -28,6 +28,7 @@ createUserWithEmailAndPassword(auth, email.value, password.value).then(
     setDoc(doc(db, "users", cred.user.uid), {
       name: auth.currentUser.email
     });
+    router.push('/home')
     // db.collection('users').doc(cred.user.uid).collection('notes');
     // collection(currentUserDoc, 'notes')
     // return collection(db, 'users').doc(cred.user.uid)
