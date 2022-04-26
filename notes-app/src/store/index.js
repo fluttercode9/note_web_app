@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   signOut
 } from 'firebase/auth';
-import { collection, getDoc, setDoc } from "firebase/firestore"
+import { doc, setDoc, collection, addDoc } from "firebase/firestore"
 
 
 export default createStore({
@@ -57,10 +57,9 @@ export default createStore({
       try {
         console.log(db)
         const createUser = await createUserWithEmailAndPassword(auth, email, password)
-        const result = await createUser
-        const database = db.collection("dupa").doc(result.user.uid);
-        await database.set({
-          id: result.user.uid
+        const result = await createUser;
+        const dataBase = await addDoc(collection(db,"dupa"), {
+          name: result.user.uid
         })
         
 
