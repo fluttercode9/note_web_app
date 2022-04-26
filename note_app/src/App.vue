@@ -8,7 +8,7 @@
         <p class="app-name">NoteApp</p>
       </div>
     </div>
-    <ul class="nav nav-pills nav-fill">
+    <ul class="nav nav-pills nav-fill mb-5">
       <li class="nav-item">
         <router-link class="nav-link nav-custom" to="home" active-class="active">Notes</router-link>
       </li>
@@ -26,11 +26,19 @@
   </div>
 </template>
 
+
+
 <script setup>
 
 import { onMounted, ref } from "vue";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { useRouter } from "vue-router"
+import { useRouter } from "vue-router";
+
+
+
+
+
+
 const isLoggedIn = ref(false);
 const router = useRouter();
 let auth ;
