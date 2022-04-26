@@ -14,8 +14,7 @@ export default {
             console.log(auth.currentUser.uid);
             addDoc(collection(db, `users/${auth.currentUser.uid}/notes`), {
                 Title: 'new',
-                Content: "do testu v2",
-                Id: this.id
+                Content: "do testu v2"                
             });
         }
     }
