@@ -10,7 +10,7 @@ export default {
         }
     },
     async mounted() {
-        const auth = getAuth();
+        const auth =  getAuth();
         const querySnapshot = await getDocs(collection(db, `users/${auth.currentUser.uid}/notes`));
         let notes_array = []
         querySnapshot.forEach((doc) => {
