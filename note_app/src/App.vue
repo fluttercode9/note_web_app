@@ -10,13 +10,13 @@
     </div>
     <ul class="nav nav-pills nav-fill mb-5">
       <li class="nav-item">
-        <router-link class="nav-link nav-custom" to="home" active-class="active">Notes</router-link>
+        <router-link class="nav-link nav-custom" to="/home" active-class="active">Notes</router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" to="register" active-class="active">Register</router-link>
+        <router-link class="nav-link" to="/register" active-class="active">Register</router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" to="sign-in" active-class="active">Log-in</router-link>
+        <router-link class="nav-link" to="/sign-in" active-class="active">Log-in</router-link>
       </li>      
       <li v-if ="isLoggedIn" class="nav-item">
         <button class="nav-link"   @click="handleLogOut">Log-out</button>
