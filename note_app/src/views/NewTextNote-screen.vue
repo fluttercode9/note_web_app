@@ -34,7 +34,8 @@ export default {
                     Title: this.noteTitle,
                     Content: this.noteContent,
                     Date: dateOfCreation                     
-                });                
+                });
+                this.$router.push('/home')                
             }
             
         }

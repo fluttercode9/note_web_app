@@ -30,7 +30,7 @@ const router = createRouter({
             }
         },
         {
-            path: "/create-text", component: () => import("../views/CreateTextNote-screen.vue"), meta: {
+            path: "/create-text", component: () => import("../views/NewTextNote-screen.vue"), meta: {
                 requiresAuth: true,
             }
         },
