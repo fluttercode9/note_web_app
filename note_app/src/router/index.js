@@ -41,8 +41,12 @@ const router = createRouter({
             }
         },
         {
-            path: "/notes/rec/:id", name:'rec',  component: () => import("../views/RecordingView-screen.vue"), meta: {
+            path: "/notes/:id", name:'photo-note', component: () => import("../views/PhotoNoteView-screen.vue"), meta: {
                 requiresAuth: true,
+            }
+        },
+        {
+            path: "/notes/rec/:id", name:'rec',  component: () => import("../views/RecordingView-screen.vue"), meta: {                requiresAuth: true,
             }
         },
        
