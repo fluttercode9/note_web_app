@@ -39,6 +39,7 @@ const register = () => {
       // return collection(db, 'users').doc(cred.user.uid)
     })
     .catch((error) => console.log(error.code));
+
 };
   const auth = getAuth(); // get auth from firebase/auth
 
@@ -50,8 +51,8 @@ const signInWithGoogle = () => {
       setDoc(doc(db, "users", result.user.uid), {
         name: auth.currentUser.email,
       });
-      router.push("/home");
-      router.push("home");
+      router.push("/home");     
+
     })
     .catch((error) => {
       console.log(error.code);
