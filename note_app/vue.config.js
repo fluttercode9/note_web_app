@@ -12,6 +12,9 @@ module.exports = defineConfig({
       appleTouchIcon: 'img/icons/note-152x152.png',
       maskIcon: 'img/icons/note.svg',
       msTileImage: 'img/icons/note-144x144.png'
+    },
+    manifestOptions: {
+      start_url: '/'
     }
   }
 })
