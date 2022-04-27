@@ -23,7 +23,7 @@ createUserWithEmailAndPassword(auth, email.value, password.value).then(
   cred => {
     console.log("Succesfully registered!");
     console.log(auth.currentUser);// <======== thats how u get curr user data 
-    router.push('/feed');
+    router.push('/home');
     console.log(cred.user.uid)
     setDoc(doc(db, "users", cred.user.uid), {
       name: auth.currentUser.email
@@ -40,7 +40,7 @@ const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(getAuth(), provider).then((result)=> {
         console.log(result.user);
-        router.push("feed");
+        router.push("home");
     })
     .catch((error) =>{
         console.log(error.code)

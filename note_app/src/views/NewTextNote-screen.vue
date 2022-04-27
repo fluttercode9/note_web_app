@@ -7,8 +7,8 @@
             <textarea style="width: 65%; height: 5vh" v-model="noteContent" class="noteContent form-control" placeholder="Text" required>
             </textarea>
         
-            <br>
-            <button @click.prevent="addTextNote" style="color: transparent; background-color: transparent; border-color: transparent">
+            <br>            
+            <button @click.prevent="addTextNote" style="color: transparent; background-color: transparent; border-color: transparent" type="submit">
             <img style="width: 30px" src = "../assets/save-icon.svg"/>
             </button>
         </form>
@@ -34,7 +34,8 @@ export default {
                     Title: this.noteTitle,
                     Content: this.noteContent,
                     Date: dateOfCreation                     
-                });                
+                });
+                this.$router.push('/home')                
             }
             
         }
