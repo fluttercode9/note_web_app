@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <br><br><br>
     <section class="main-controls">
       <div id="buttons">
         <button class="record">Record</button>
