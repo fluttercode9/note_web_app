@@ -2,18 +2,21 @@
 <script>
 import { storage } from "../main.js";
 import { ref, getDownloadURL } from "firebase/storage";
+import {auth} from '../main.js'
 
 export default {
   data() {
     return {
-      title: null,
+      rec: null,
+      id: this.$route.params.id,
+      uid: auth.currentUser.uid,
     };
   },
   async mounted() {
     // audio files handling
     const audioRef = ref(
       storage,
-      "users/XWcmM6BwxxYhm3wJAHhq9bL2H2M2/recordings/sssssssssssss"
+      `users/${this.uid}/recordings/${this.id}`
     );
 
     getDownloadURL(audioRef)
@@ -29,6 +32,7 @@ export default {
           const blob = xhr.response;
           console.log(blob);
           const soundClips = document.querySelector(".sound-clips");
+          soundClips.innerHTML = ""
           const audio = document.createElement("audio");
           audio.controls = true;
           clipContainer.classList.add("clip");
@@ -55,7 +59,7 @@ export default {
  
 <template>
   <div class="container">
-      <h1>{{title}}</h1>
+      <h1>{{id}}</h1>
     <section class="main-controls">
       <div id="buttons"></div>
     </section>
