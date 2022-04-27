@@ -18,8 +18,7 @@ export default {
 
         const querySnapshot = await getDocs(collection(db, `users/${auth.currentUser.uid}/notes`));
 
-        querySnapshot.forEach((doc) => {
-            console.log(`${doc.id} => ${doc.data()}`);
+        querySnapshot.forEach((doc) => {            
             this.text_notes.push(doc)
         });
         const storage = getStorage();
