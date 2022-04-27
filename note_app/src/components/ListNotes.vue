@@ -18,7 +18,8 @@ export default {
 
         const querySnapshot = await getDocs(collection(db, `users/${auth.currentUser.uid}/notes`));
 
-        querySnapshot.forEach((doc) => {            
+        querySnapshot.forEach((doc) => {
+            console.log(`${doc.id} => ${doc.data()}`);
             this.text_notes.push(doc)
         });
         const storage = getStorage();
@@ -96,10 +97,12 @@ export default {
         <div class="container-flex" v-if="recording_notes">
             <TransitionGroup name="list">
             <div class="card mb-1" v-for="recording_note in recording_notes" :key="recording_note.title">
+                <router-link :to="{ name: 'rec', params: { id: recording_note.title } }">
                 <div class="card-body" style="text-align: justify;text-justify: inter-word;">
                     <h5 class="card-title">{{ recording_note.title }}</h5>
                     <i class="bi bi-soundwave" style="font-size: 2em"></i>
                 </div>
+                </router-link>
             </div>
             </TransitionGroup>
         </div>
