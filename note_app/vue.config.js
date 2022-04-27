@@ -25,6 +25,11 @@ module.exports = defineConfig({
           type: "image/png"
         }, 
         {
+          "src": "img/icons/note-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png"
+          },
+        {
           src: "img/icons/note-144x144.png",
           sizes: "144x144",
           type: "image/png"
@@ -33,7 +38,22 @@ module.exports = defineConfig({
           src: "img/icons/note-152x152.png",
           sizes: "152x152",
           type: "image/png"
-        }],
+        },
+        {
+          "src": "img/icons/note-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        },
+        {
+          "src": "img/icons/note-256x256.png",
+          "sizes": "256x256",
+          "type": "image/png"
+        }, {
+          "src": "img/icons/note-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        }
+      ],
     }
   }
 })
