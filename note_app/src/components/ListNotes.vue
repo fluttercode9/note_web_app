@@ -4,24 +4,23 @@ import {db} from "../main.js";
 import {getAuth} from "firebase/auth";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 
+
 export default {
     data() {
         return {
-            text_notes: null,
+            text_notes: [],
             photo_notes: [],
             recording_notes: []
         }
     },
-    async created() {
+    async mounted() {
         const auth = getAuth();
         const querySnapshot = await getDocs(collection(db, `users/${auth.currentUser.uid}/notes`));
-        const notes_array = [];
 
         querySnapshot.forEach((doc) => {
             console.log(`${doc.id} => ${doc.data()}`);
-            notes_array.push(doc)
+            this.text_notes.push(doc)
         });
-        this.text_notes = notes_array
         const storage = getStorage();
         const photoListRef = ref(storage, `users/${auth.currentUser.uid}/photos`);
         const photoStorageSnapshot = await listAll(photoListRef);
@@ -51,14 +50,6 @@ export default {
         })
 
 
-
-
-
-
-
-
-
-
     },
     methods: {
         first20: function (string) {
@@ -78,7 +69,8 @@ export default {
 <template>
     <div class="mx-auto" >
         <div class="container-flex" v-if="text_notes">
-            <div class="card mb-1" v-for="note in text_notes" :key="note.Title">
+            <TransitionGroup name="list">
+            <div class="card mb-1" v-for="note in text_notes" :key="note.data().Title">
                 <router-link :to="{name:'note', params:{ id: note.id}}">
                     <div class="card-body" style="text-align: justify;text-justify: inter-word;">
                         <h5 class="card-title">{{ note.data().Title }}</h5>
@@ -86,22 +78,29 @@ export default {
                     </div>
                 </router-link>
             </div>
+            </TransitionGroup>
         </div>
         <div class="container-flex" v-if="photo_notes">
+            <TransitionGroup name="list">
             <div class="card mb-1" v-for="photo_note in photo_notes" :key="photo_note.title">
                 <div class="card-body" style="text-align: justify;text-justify: inter-word;">
                     <h5 class="card-title">{{ photo_note.title }}</h5>
                     <img style="max-width:100px" class="img-thumbnail" v-bind:src="photo_note.url">
                 </div>
             </div>
+            </TransitionGroup>
+
         </div>
         <div class="container-flex" v-if="recording_notes">
+            <TransitionGroup name="list">
             <div class="card mb-1" v-for="recording_note in recording_notes" :key="recording_note.title">
                 <div class="card-body" style="text-align: justify;text-justify: inter-word;">
                     <h5 class="card-title">{{ recording_note.title }}</h5>
                     <i class="bi bi-soundwave" style="font-size: 2em"></i>
                 </div>
             </div>
+            </TransitionGroup>
         </div>
     </div>
 </template>
+
