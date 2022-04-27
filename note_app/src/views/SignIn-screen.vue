@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <h1 class="col-sm">Sign in to NoteApp</h1>
+      <p class="col-sm">Sign in to NoteApp</p>
       <div class="row justify-content-md-center">
         <input class="col-sm-4" type="text" placeholder="Email" v-model="email" />
       </div>
