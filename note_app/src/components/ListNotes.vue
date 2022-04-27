@@ -14,6 +14,7 @@ export default {
     },
     async created() {
         const auth = getAuth();
+
         const querySnapshot = await getDocs(collection(db, `users/${auth.currentUser.uid}/notes`));
         const notes_array = [];
 

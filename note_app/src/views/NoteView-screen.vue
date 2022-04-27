@@ -1,8 +1,8 @@
 
 <script>
-import { doc, getDoc, deleteDoc} from "firebase/firestore";
-import { db, auth } from "../main.js";
 
+import { doc, getDoc, deleteDoc } from "firebase/firestore";
+import { db, auth } from "../main.js";
 export default {
   data() {
     return {
@@ -22,15 +22,14 @@ export default {
 
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
-        this.title = docSnap.data().Title
-        this.content = docSnap.data().Content
 
+      this.title = docSnap.data().Title;
+      this.content = docSnap.data().Content;
     } else {
       // doc.data() will be undefined in this case
       console.log("No such document!");
     }
   },
-
   methods: {
     deleteNote: function(){      
       console.log("id auth to "+ auth.currentUser.uid);
@@ -39,10 +38,12 @@ export default {
       this.$router.push('/home')
     }
   },
+
 };
 </script>
  
 <template>
+
   <div class="container">       
       <button @click.prevent="deleteNote" style="color: transparent; background-color: transparent; border-color: transparent" type="submit">
         <img style="width: 30px" src = "../assets/trash-bin.svg"/>
