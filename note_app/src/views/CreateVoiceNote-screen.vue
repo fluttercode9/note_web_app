@@ -8,17 +8,13 @@
     </section>
 
     <section class="sound-clips"></section>
-
   </div>
 </template>
 
 <script>
 import { ref, uploadBytes } from "firebase/storage";
-import {storage, auth} from '../main.js';
+import { storage, auth } from "../main.js";
 
-// https://github.com/mdn/content/blob/main/files/en-us/web/api/mediastream_recording_api/using_the_mediastream_recording_api/index.md
-// import { doc, getDoc } from "firebase/firestore";
-// import { db, auth } from "../main.js";
 
 export default {
   data() {
@@ -36,16 +32,16 @@ export default {
     //main block for doing the audio recording
 
     if (navigator.mediaDevices.getUserMedia) {
-      console.log("getUserMedia supported.")
+      console.log("getUserMedia supported.");
 
-      const constraints = { audio: true }
-      let chunks = []
+      const constraints = { audio: true };
+      let chunks = [];
 
       let onSuccess = function (stream) {
-        const mediaRecorder = new MediaRecorder(stream)
+        const mediaRecorder = new MediaRecorder(stream);
 
         record.onclick = function () {
-          soundClips.innerHTML = ""
+          soundClips.innerHTML = "";
           mediaRecorder.start();
           console.log(mediaRecorder.state);
           console.log("recorder started");
@@ -103,7 +99,7 @@ export default {
           audio.controls = true;
           const blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
           chunks = [];
-          console.log(blob)
+          console.log(blob);
           const audioURL = window.URL.createObjectURL(blob);
           audio.src = audioURL;
           console.log("recorder stopped");
@@ -113,11 +109,13 @@ export default {
             evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
           };
           saveButton.onclick = function () {
-            const storageRef = ref(storage, `users/${auth.currentUser.uid}/recordings/${clipName}`)
+            const storageRef = ref(
+              storage,
+              `users/${auth.currentUser.uid}/recordings/${clipName}`
+            );
             uploadBytes(storageRef, blob).then(() => {
-                console.log('uploaded blob file!');
-            })
-            
+              console.log("uploaded blob file!");              
+            });
           };
 
           clipLabel.onclick = function () {
