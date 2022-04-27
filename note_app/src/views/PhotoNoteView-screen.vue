@@ -34,8 +34,10 @@ export default {
     deleteNote: function(){      
       console.log("id auth to "+ auth.currentUser.uid);
       console.log("id to " + this.id)
-      deleteDoc(doc(db, `users/${this.uid}/notes/${this.id}`));
-      this.$router.push('/home')
+      deleteDoc(doc(db, `users/${this.uid}/notes/${this.id}`)).then(() => {
+        this.$router.push('/home');
+      })
+      
     }
   },
 
