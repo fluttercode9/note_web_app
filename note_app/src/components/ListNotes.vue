@@ -68,25 +68,18 @@ export default {
 </script>
 
 <template>
-  <div class="mx-auto">
-    <div class="container-flex" v-if="text_notes">
-      <TransitionGroup name="list">
-        <div
-          class="card mb-1"
-          v-for="note in text_notes"
-          :key="note.data().Title"
-        >
-          <router-link :to="{ name: 'note', params: { id: note.id } }">
-            <div
-              class="card-body"
-              style="text-align: justify; text-justify: inter-word"
-            >
-              <h5 class="card-title">{{ note.data().Title }}</h5>
-              <p style="color: grey" class="card-text">
-                {{ first20(note.data().Content) }}
-              </p>
+    <div class="mx-auto" >
+        <div class="container-flex" v-if="text_notes">
+            <TransitionGroup name="list">
+            <div class="card mb-1" v-for="note in text_notes" :key="note.data().Title">
+                <router-link :to="{name:'note', params:{ id: note.id}}">
+                    <div class="card-body" style="text-align: justify;text-justify: inter-word;">
+                        <h5 class="card-title">{{ note.data().Title }}</h5>
+                        <p style="color:grey;" class="card-text">{{ first20(note.data().Content)}}</p>
+                    </div>
+                </router-link>
             </div>
-          </router-link>
+            </TransitionGroup>
         </div>
         <div class="container-flex" v-if="photo_notes">
             <TransitionGroup name="list">
@@ -101,8 +94,6 @@ export default {
             </TransitionGroup>
 
         </div>
-      </TransitionGroup>
-    </div>
     <div class="container-flex" v-if="recording_notes">
       <TransitionGroup name="list">
         <div
