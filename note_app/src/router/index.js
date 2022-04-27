@@ -19,11 +19,7 @@ const router = createRouter({
                 requiresAuth: true,
             }
         },
-        {
-            path: "/note-type", component: () => import("../views/ChooseNoteType-screen.vue"), meta: {
-                requiresAuth: true,
-            }
-        },
+       
         {
             path: "/create-photo", component: () => import("../views/CreatePhotoNote-screen.vue"), meta: {
                 requiresAuth: true,
@@ -41,6 +37,11 @@ const router = createRouter({
         },
         {
             path: "/notes/:id", name:'note', component: () => import("../views/NoteView-screen.vue"), meta: {
+                requiresAuth: true,
+            }
+        },
+        {
+            path: "/notes/rec",  component: () => import("../views/RecordingView-screen.vue"), meta: {
                 requiresAuth: true,
             }
         },

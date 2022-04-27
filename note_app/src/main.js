@@ -6,6 +6,8 @@ import { initializeApp } from "firebase/app";
 import { h } from 'vue';
 import { getFirestore } from "firebase/firestore"; 
 import { getAuth } from 'firebase/auth';
+import { getStorage } from "firebase/storage";
+
   // Import the functions you need from the SDKs you need
 //import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -30,6 +32,7 @@ const firebase_app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(firebase_app)
 export const auth = getAuth()
+export const storage = getStorage(firebase_app)
 
 initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
