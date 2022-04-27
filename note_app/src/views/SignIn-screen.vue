@@ -1,12 +1,29 @@
 <template>
-  <div>
-    <h1>Sign in</h1>
-    <input type="text" placeholder="Email" v-model="email" />
-    <input type="password" placeholder="Password" v-model="password" />
-    <button @click="register">Submit</button>
-    <button @click="signInWithGoogle">Sign In With Google</button>
-    <p v-if="errorMessage">{{ errorMessage }}</p>
-    <a href="/register"> czy może ;) nie masz :>>> jeszzczeee kąąątaaaa heeeee??? ;> </a>
+  <div class="container-fluid">
+    <div class="row">
+      <h1 class="col-sm">Sign in to NoteApp</h1>
+      <div class="row justify-content-md-center">
+        <input class="col-sm-4" type="text" placeholder="Email" v-model="email" />
+      </div>
+      <div class="row justify-content-md-center">      
+        <input class="col-sm-4" type="password" placeholder="Password" v-model="password" />
+      </div>
+      <br>
+      <button @click="register" class="button-yellow btn">Sign in</button>
+      <br>
+      <button @click="signInWithGoogle" style="color: transparent; background-color: transparent; border-color: transparent">
+      <img style="width: 30px" src = "../assets/google-icon.svg"/>
+      </button>
+      <p v-if="errorMessage">{{ errorMessage }}</p>
+      <br>
+      <br>
+      <h5>OR</h5>
+      <br>
+    
+      <router-link class="nav-link" to="register" active-class="active">
+        <button class="button-yellow btn">Create an account</button>
+      </router-link>
+     </div> 
   </div>
 </template>
 
