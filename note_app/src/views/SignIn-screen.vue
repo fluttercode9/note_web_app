@@ -9,8 +9,10 @@
         <input class="col-sm-4" type="password" placeholder="Password" v-model="password" />
       </div>
       <br>
-      <button @click="register" class="button-yellow btn">Sign in</button>
-      <br>
+      <div class="row">
+        <button @click="register" class="button-yellow btn">Sign in</button>
+        <br>
+      </div>
       <button @click="signInWithGoogle" style="color: transparent; background-color: transparent; border-color: transparent">
       <img style="width: 30px" src = "../assets/google-icon.svg"/>
       </button>
