@@ -1,5 +1,6 @@
 <template>
     <div class="mx-auto" style="max-width: 500px">
+        <br><br><br>
         <form @submit.prevent="uploadPhoto">
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Title</label>

@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class ='container'>
         <p>Enter your note</p>
-        <form>
-            <input style="width: 32.5%; height: 5vh" class="form-control" v-model="noteTitle" type="text" placeholder="Title" required>
+        <form class = 'row mb-3'>
+            <input style="width: 90%%; height: 5vh" class="form-control row mb-3" v-model="noteTitle" type="text" placeholder="Title" required>
             <br>
-            <textarea style="width: 65%; height: 5vh" v-model="noteContent" class="noteContent form-control" placeholder="Text" required>
+            <textarea style="width: 100%; height: 200px" v-model="noteContent" class="row mb-3 noteContent form-control" placeholder="Text" required>
             </textarea>
         
             <br>            
