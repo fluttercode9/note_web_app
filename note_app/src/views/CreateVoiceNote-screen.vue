@@ -15,6 +15,7 @@
 <script>
 import { ref, uploadBytes } from "firebase/storage";
 import {storage, auth} from '../main.js';
+import {useRouter} from 'vue-router'
 
 // https://github.com/mdn/content/blob/main/files/en-us/web/api/mediastream_recording_api/using_the_mediastream_recording_api/index.md
 // import { doc, getDoc } from "firebase/firestore";
@@ -25,6 +26,7 @@ export default {
     return {};
   },
   async mounted() {
+    const router = useRouter()
     const record = document.querySelector(".record");
     const stop = document.querySelector(".stop");
     const soundClips = document.querySelector(".sound-clips");
@@ -116,7 +118,9 @@ export default {
             const storageRef = ref(storage, `users/${auth.currentUser.uid}/recordings/${clipName}`)
             uploadBytes(storageRef, blob).then(() => {
                 console.log('uploaded blob file!');
+                router.push('home')
             })
+
             
           };
 

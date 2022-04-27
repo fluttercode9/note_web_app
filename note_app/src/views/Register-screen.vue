@@ -5,6 +5,7 @@
     <input type="password" placeholder="Password" v-model="password" />
     <button @click="register">Submit</button>
     <button @click="signInWithGoogle">Register With Google</button>
+    <button @click="signInWithFacebook">Register With Facebook</button>
   </div>
 </template>
 
@@ -17,6 +18,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
+  FacebookAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
 const email = ref(""); //https://compiletab.com/vue-get-input-value/#get-input-value-using-ref
@@ -45,6 +47,21 @@ const register = () => {
 
 const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider();
+  signInWithPopup(getAuth(), provider)
+    .then((result) => {
+      console.log(result.user);
+      setDoc(doc(db, "users", result.user.uid), {
+        name: auth.currentUser.email,
+      });
+      router.push("/home");     
+
+    })
+    .catch((error) => {
+      console.log(error.code);
+    });
+};
+const signInWithFacebook = () => {
+  const provider = new FacebookAuthProvider();
   signInWithPopup(getAuth(), provider)
     .then((result) => {
       console.log(result.user);
