@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Roboto+Slab:wght@500&display=swap');
-
+@import 'bootstrap-icons';
 * {
     font-family: 'Roboto Slab', serif;
 }
@@ -30,6 +30,10 @@
     padding-left: 0.25em !important;
     padding-right: 0.25em !important;
 
+}
+
+.btn-add-photo {
+    background-color: #ffc300 !important;
 }
 
 /* .active {
