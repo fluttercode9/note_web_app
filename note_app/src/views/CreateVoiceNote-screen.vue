@@ -15,9 +15,6 @@
 import { ref, uploadBytes } from "firebase/storage";
 import { storage, auth } from "../main.js";
 
-// https://github.com/mdn/content/blob/main/files/en-us/web/api/mediastream_recording_api/using_the_mediastream_recording_api/index.md
-// import { doc, getDoc } from "firebase/firestore";
-// import { db, auth } from "../main.js";
 
 export default {
   data() {
@@ -117,7 +114,7 @@ export default {
               `users/${auth.currentUser.uid}/recordings/${clipName}`
             );
             uploadBytes(storageRef, blob).then(() => {
-              console.log("uploaded blob file!");
+              console.log("uploaded blob file!");              
             });
           };
 

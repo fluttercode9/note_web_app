@@ -1,7 +1,7 @@
 
 <script>
 import { storage } from "../main.js";
-import { ref, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL, deleteObject} from "firebase/storage";
 import {auth} from '../main.js'
 
 export default {
@@ -53,7 +53,16 @@ export default {
       });
   },
 
-  methods: {},
+  methods: {
+    deleteRecording: function(){      
+      const storageRef = ref(
+              storage,
+              `users/${auth.currentUser.uid}/recordings/${this.id}`
+            );    
+      deleteObject(storageRef);
+      this.$router.push('/home')
+    }
+  },
 };
 </script>
  
@@ -63,6 +72,9 @@ export default {
     <section class="main-controls">
       <div id="buttons"></div>
     </section>
+    <button @click.prevent="deleteRecording" style="color: transparent; background-color: transparent; border-color: transparent" type="submit">
+        <img style="width: 30px" src = "../assets/trash-bin.svg"/>
+    </button>
 
     <section class="sound-clips"></section>
   </div>
