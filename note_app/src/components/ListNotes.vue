@@ -7,8 +7,9 @@ import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 export default {
     data() {
         return {
-            notes: null,
-            photo_notes: null
+            text_notes: null,
+            photo_notes: [],
+            recording_notes: []
         }
     },
     async created() {
@@ -20,24 +21,38 @@ export default {
             console.log(`${doc.id} => ${doc.data()}`);
             notes_array.push(doc)
         });
-        this.notes = notes_array
-        const photo_notes_array = [];
+        this.text_notes = notes_array
         const storage = getStorage();
-        const listRef = ref(storage, `users/${auth.currentUser.uid}/photos`);
-        const storageSnapshot = await listAll(listRef);
-        storageSnapshot.items.forEach((itemRef) => {
+        const photoListRef = ref(storage, `users/${auth.currentUser.uid}/photos`);
+        const photoStorageSnapshot = await listAll(photoListRef);
+        photoStorageSnapshot.items.forEach((itemRef) => {
             getDownloadURL(ref(storage, itemRef._location.path_)).then((file_url) => {
+                console.log(`item: ${itemRef.name}, url: ${file_url}`);
                 const file_object = {
-                    name: itemRef.name,
+                    title: itemRef.name,
                     url: file_url
-                }
-                photo_notes_array.push(file_object);
+                };
+                this.photo_notes.push(file_object);
             })
 
         })
-        this.photo_notes = photo_notes_array;
-        console.log(photo_notes_array)
-        console.log(this.photo_notes.length)
+        const recordingListRef = ref(storage, `users/${auth.currentUser.uid}/recordings`);
+        const recordingStorageSnapshot = await listAll(recordingListRef);
+        recordingStorageSnapshot.items.forEach((itemRef) => {
+            getDownloadURL(ref(storage, itemRef._location.path_)).then((file_url) => {
+                console.log(`item: ${itemRef.name}, url: ${file_url}`);
+                const file_object = {
+                    title: itemRef.name,
+                    url: file_url
+                };
+                this.recording_notes.push(file_object);
+            })
+
+        })
+
+
+
+
 
 
 
@@ -61,9 +76,9 @@ export default {
 </script>
 
 <template>
-    <div>
-        <div class="container-flex" v-if="notes">
-            <div class="card mb-1" v-for="note in notes" :key="note.Title">
+    <div class="mx-auto" >
+        <div class="container-flex" v-if="text_notes">
+            <div class="card mb-1" v-for="note in text_notes" :key="note.Title">
                 <router-link :to="{name:'note', params:{ id: note.id}}">
                     <div class="card-body" style="text-align: justify;text-justify: inter-word;">
                         <h5 class="card-title">{{ note.data().Title }}</h5>
@@ -74,9 +89,17 @@ export default {
         </div>
         <div class="container-flex" v-if="photo_notes">
             <div class="card mb-1" v-for="photo_note in photo_notes" :key="photo_note.title">
-                <div>
+                <div class="card-body" style="text-align: justify;text-justify: inter-word;">
                     <h5 class="card-title">{{ photo_note.title }}</h5>
-                    <img src="{{ photo_note.url }}">
+                    <img style="max-width:100px" class="img-thumbnail" v-bind:src="photo_note.url">
+                </div>
+            </div>
+        </div>
+        <div class="container-flex" v-if="recording_notes">
+            <div class="card mb-1" v-for="recording_note in recording_notes" :key="recording_note.title">
+                <div class="card-body" style="text-align: justify;text-justify: inter-word;">
+                    <h5 class="card-title">{{ recording_note.title }}</h5>
+                    <i class="bi bi-soundwave" style="font-size: 2em"></i>
                 </div>
             </div>
         </div>
