@@ -32,6 +32,7 @@ export default {
           const blob = xhr.response;
           console.log(blob);
           const soundClips = document.querySelector(".sound-clips");
+          soundClips.innerHTML = ""
           const audio = document.createElement("audio");
           audio.controls = true;
           clipContainer.classList.add("clip");
