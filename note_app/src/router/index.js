@@ -47,8 +47,6 @@ const router = createRouter({
         },
         {
             path: "/notes/rec",  component: () => import("../views/RecordingView-screen.vue"), meta: {
-            path: "/notes/rec/:id", name:'rec',  component: () => import("../views/RecordingView-screen.vue"), meta: {
-
                 requiresAuth: true,
             }
         },
