@@ -34,8 +34,10 @@ export default {
     deleteNote: function(){      
       console.log("id auth to "+ auth.currentUser.uid);
       console.log("id to " + this.id)
-      deleteDoc(doc(db, `users/${this.uid}/notes/${this.id}`));
-      this.$router.push('/home')
+      deleteDoc(doc(db, `users/${this.uid}/notes/${this.id}`)).then(() => {
+        this.$router.push('/home');
+      })
+      
     }
   },
 
@@ -48,11 +50,13 @@ export default {
       <button @click.prevent="deleteNote" style="color: transparent; background-color: transparent; border-color: transparent" type="submit">
         <img style="width: 30px" src = "../assets/trash-bin.svg"/>
       </button>
-    
-
-
-    <h1>Note id: {{ id }}:</h1>
-    <h1>Note title: {{ title}}</h1>
-    <h2>Content: {{content}}</h2>
+        <div class="card mb-1">
+      <div class="card-body" style="text-align: justify;text-justify: inter-word;">
+        <h5 class="card-title">{{ title }}</h5>
+        <p class="card-text" style="color:grey;">
+          {{content}}
+        </p>
+      </div>
+    </div>
   </div>
 </template>

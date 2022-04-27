@@ -84,7 +84,7 @@ export default {
         <div class="container-flex" v-if="photo_notes">
             <TransitionGroup name="list">
             <div class="card mb-1" v-for="photo_note in photo_notes" :key="photo_note.title">
-                <router-link :to="{name:'note', params:{ id: photo_note.title, url: photo_note.url}}">
+                <router-link :to="{name:'photo-note', params:{ id: photo_note.title, url: photo_note.url}}">
                 <div class="card-body" style="text-align: justify;text-justify: inter-word;">
                     <h5 class="card-title">{{ photo_note.title }}</h5>
                     <img style="max-width:100px" class="img-thumbnail" v-bind:src="photo_note.url">
