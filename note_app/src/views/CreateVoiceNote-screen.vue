@@ -13,7 +13,9 @@
 
 <script>
 import { ref, uploadBytes } from "firebase/storage";
-import { storage, auth } from "../main.js";
+import {storage, auth} from '../main.js';
+import {useRouter} from 'vue-router'
+
 
 
 export default {
@@ -21,6 +23,7 @@ export default {
     return {};
   },
   async mounted() {
+    const router = useRouter()
     const record = document.querySelector(".record");
     const stop = document.querySelector(".stop");
     const soundClips = document.querySelector(".sound-clips");
@@ -114,8 +117,10 @@ export default {
               `users/${auth.currentUser.uid}/recordings/${clipName}`
             );
             uploadBytes(storageRef, blob).then(() => {
-              console.log("uploaded blob file!");              
-            });
+                console.log('uploaded blob file!');
+                router.push('home')
+            })            
+
           };
 
           clipLabel.onclick = function () {
