@@ -1,9 +1,15 @@
 <template>
-  <div>
+  <div class="container-fluid align-items-center">
     <h1>Create an account</h1>
-    <input type="text" placeholder="Email" v-model="email" />
-    <input type="password" placeholder="Password" v-model="password" />
-    <button @click="register">Submit</button>
+    <div class="row justify-content-md-center">
+      <input class="col-sm-4" type="text" placeholder="Email" v-model="email" />
+    </div>
+    <div class="row justify-content-md-center">
+      <input class="col-sm-4" type="password" placeholder="Password" v-model="password" />
+    </div>
+    <div class="row justify-content-md-center">
+      <button class="button-yellow btn col-sm-4" @click="register">Submit</button>
+    </div>
     <button @click="signInWithGoogle">Register With Google</button>
     <button @click="signInWithFacebook">Register With Facebook</button>
   </div>

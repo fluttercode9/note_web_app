@@ -15,10 +15,7 @@
       </div>
       <button @click="signInWithGoogle" style="color: transparent; background-color: transparent; border-color: transparent">
         <img style="width: 30px" src = "../assets/google-icon.svg"/>
-      </button>
-      <button @click="signInWithFacebook" style="color: transparent; background-color: transparent; border-color: transparent">
-        <img style="width: 30px" src = "../assets/facebook-icon.svg"/>
-      </button>
+      </button>      
       <p v-if="errorMessage">{{ errorMessage }}</p>
       <br>
       <br>
@@ -33,11 +30,10 @@
 </template>
 
 <script setup>
-import { db } from "../main.js";
-import { doc, setDoc } from "firebase/firestore";
+
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 const email = ref(""); //https://compiletab.com/vue-get-input-value/#get-input-value-using-ref
 const password = ref("");
 const router = useRouter();
@@ -80,20 +76,4 @@ const signInWithGoogle = () => {
     })
 };
 
-const signInWithFacebook = () => {
-  const auth = getAuth();
-  const provider = new FacebookAuthProvider();
-  signInWithPopup(getAuth(), provider)
-    .then((result) => {
-      console.log(result.user);
-      setDoc(doc(db, "users", result.user.uid), {
-        name: auth.currentUser.email,
-      });
-      router.push("/home");     
-
-    })
-    .catch((error) => {
-      console.log(error.code);
-    });
-};
 </script>
