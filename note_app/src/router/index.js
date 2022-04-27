@@ -36,12 +36,12 @@ const router = createRouter({
             }
         },
         {
-            path: "/notes/:id", name:'note', component: () => import("../views/NoteView-screen.vue"), meta: {
+            path: "/notes/:id", name:'photo-note', component: () => import("../views/NoteView-screen.vue"), meta: {
                 requiresAuth: true,
             }
         },
         {
-            path: "/notes/:id", name:'photo-note', component: () => import("../views/PhotoNoteView-screen.vue"), meta: {
+            path: "/notes/:id", name:'note', component: () => import("../views/PhotoNoteView-screen.vue"), meta: {
                 requiresAuth: true,
             }
         },
