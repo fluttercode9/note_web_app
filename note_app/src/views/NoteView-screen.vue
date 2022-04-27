@@ -2,9 +2,7 @@
 <script>
 
 import { doc, getDoc, deleteDoc } from "firebase/firestore";
-import { db, auth, storage } from "../main.js";
-import {  ref, getDownloadURL  } from "firebase/storage";
-
+import { db, auth } from "../main.js";
 export default {
   data() {
     return {
