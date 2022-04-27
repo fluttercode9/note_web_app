@@ -1,58 +1,47 @@
 
 <script>
 
-import { doc, getDoc, deleteDoc } from "firebase/firestore";
-import { db, auth } from "../main.js";
+import { auth } from "../main.js";
+import { getStorage, ref, deleteObject } from "firebase/storage";
+import router from '../router'
 export default {
   data() {
     return {
       note: null,
       id: this.$route.params.id,
       auth: auth,
-      uid: auth.currentUser.uid,
-      title: null,
-      content: null,
+      url: this.$route.params.url
     };
   },
-  async mounted() {
-    const docRef = doc(db, "users", `${this.uid}`, "notes", `${this.id}`);
-    const docSnap = await getDoc(docRef);
-
-    // this.note =  docSnap;
-
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-
-      this.title = docSnap.data().Title;
-      this.content = docSnap.data().Content;
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
-  },
   methods: {
-    deleteNote: function(){      
-      console.log("id auth to "+ auth.currentUser.uid);
-      console.log("id to " + this.id)
-      deleteDoc(doc(db, `users/${this.uid}/notes/${this.id}`));
-      this.$router.push('/home')
+    deleteNote: function(){    
+      const storage = getStorage();  
+      const fileRef = ref(storage, `users/${auth.currentUser.uid}/photos/${this.id}`);
+      deleteObject(fileRef).then(() => {
+        console.log('Deleted');
+        router.push({ path:"/home" });
+      }).catch((error) => {
+        alert('There was an error while deleting the file')
+        console.log(error)
+      });
     }
-  },
+  }
 
 };
 </script>
  
 <template>
 
-  <div class="container">       
-      <button @click.prevent="deleteNote" style="color: transparent; background-color: transparent; border-color: transparent" type="submit">
-        <img style="width: 30px" src = "../assets/trash-bin.svg"/>
-      </button>
-    
-
-
-    <h1>Note id: {{ id }}:</h1>
-    <h1>Note title: {{ title}}</h1>
-    <h2>Content: {{content}}</h2>
+  <div class="container">
+    <button @click.prevent="deleteNote"
+      style="color: transparent; background-color: transparent; border-color: transparent" type="submit">
+      <img style="width: 30px" src="../assets/trash-bin.svg" />
+    </button>
+    <div class="card mb-1">
+      <div class="card-body" style="text-align: justify;text-justify: inter-word;">
+        <h5 class="card-title">{{ id }}</h5>
+        <img class="img-thumbnail" v-bind:src="url">
+      </div>
+    </div>
   </div>
 </template>
