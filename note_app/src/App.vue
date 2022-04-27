@@ -1,47 +1,33 @@
 <template>
-  <div class="container">
-    <div class="row position-absolute top-0 ms-2 mt-2">
-      <div class="col col-title">
-        <img style="height:40px"  src = "./assets/note.svg" alt="NoteAppLogo"/>
-      </div>
-      <div class="col col-title">
-        <p class="app-name">NoteApp</p>
-      </div>
+
+
+    <div class="container">
+      <h1>
+        <span style="color: black"
+          >NoteApp
+          <img style="height: 40px" src="./assets/note.svg" alt="NoteAppLogo" />
+        </span>
+        <button v-if="isLoggedIn" class="btn right" @click="handleLogOut">
+          Log-out
+        </button>
+      </h1>
+          <router-view />
+
     </div>
-    <ul class="nav nav-pills nav-fill mb-5">
-      <li class="nav-item">
-        <router-link class="nav-link nav-custom" to="/home" active-class="active">Notes</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/register" active-class="active">Register</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link class="nav-link" to="/sign-in" active-class="active">Log-in</router-link>
-      </li>      
-      <li v-if ="isLoggedIn" class="nav-item">
-        <button class="nav-link"   @click="handleLogOut">Log-out</button>
-      </li>
-    </ul>
-    <router-view />
-  </div>
+
+  
 </template>
 
 
 
 <script setup>
-
 import { onMounted, ref } from "vue";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "vue-router";
 
-
-
-
-
-
 const isLoggedIn = ref(false);
 const router = useRouter();
-let auth ;
+let auth;
 
 onMounted(() => {
   auth = getAuth();
@@ -59,8 +45,6 @@ const handleLogOut = () => {
     router.push("sign-in");
   });
 };
-
-
 </script>
 
 
