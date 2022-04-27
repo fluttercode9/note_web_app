@@ -32,39 +32,6 @@ export default {
       console.log("No such document!");
     }
   },
-
-    // audio files handling
-    const audioRef = ref(
-      storage,
-      "users/XWcmM6BwxxYhm3wJAHhq9bL2H2M2/recordings/sssssssssssss"
-    );
-    // console.log(audioRef.name);
-    // const blob = getBlob(audioRef)
-    // console.log(blob)
-    getDownloadURL(audioRef)
-      .then((url) => {
-        // `url` is the download URL for 'images/stars.jpg'
-
-        // This can be downloaded directly:
-        (console.log('resp'))
-        const xhr = new XMLHttpRequest();
-        xhr.responseType = "blob";
-        xhr.onload = () => {
-            console.log('hej')
-          const blob = xhr.response;
-          console.log(blob)
-        };
-        xhr.open("GET", url);
-        xhr.send();
-
-        // Or inserted into an <img> element
-        
-      })
-      .catch((error) => {
-        console.log(error)
-      });
-  },
-
   methods: {
     deleteNote: function(){      
       console.log("id auth to "+ auth.currentUser.uid);
